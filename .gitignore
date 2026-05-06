@@ -1,0 +1,73 @@
+# Enigma — .gitignore
+# Public-facing repo. Personal outreach + internal strategy stays out.
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Personal outreach drafts — DO NOT PUBLISH
+# ──────────────────────────────────────────────────────────────────────────────
+EMAIL_FLACK_AVELLA.md
+EMAIL_IVEZIC_APPLIED_QUANTUM.md
+EMAIL_SEQUENCE_FLACK.txt
+EMAIL_SEQUENCE_IVEZIC.txt
+SEND_EMAIL_FLACK.txt
+SEND_EMAIL_IVEZIC.txt
+SEND_FAA_RFI_CHECKLIST.txt
+FAA_RFI_RESPONSE_DRAFT.md
+OUTREACH_PACKAGE_S11.md
+TARGET_RANKING_FINAL.md
+MARKETING_STRATEGY.md
+Direct_Marketing.pdf
+tools/generate_direct_marketing.py
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Internal audit / progress / research
+# ──────────────────────────────────────────────────────────────────────────────
+AUDIT_S11_*.md
+phase_progress.json
+research/
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Python
+# ──────────────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.coverage
+htmlcov/
+build/
+dist/
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Secrets / env / keys
+# ──────────────────────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+config.local.*
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Editor / OS
+# ──────────────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Claude / agent internals
+# ──────────────────────────────────────────────────────────────────────────────
+.claude/
+CLAUDE.md
+AGENTS.md

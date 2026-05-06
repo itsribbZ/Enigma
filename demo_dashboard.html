@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PQC Scanner Dashboard — Enigma</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:#0a0e1a; color:#e0e4f0; }
+.container { max-width:1400px; margin:0 auto; padding:20px; }
+.header { text-align:center; padding:30px 0 20px; }
+.header h1 { color:#d4af37; font-size:28px; letter-spacing:2px; }
+.header .subtitle { color:#8890a8; font-size:14px; margin-top:6px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin:20px 0; }
+.card { background:#141828; border:1px solid #1e2640; border-radius:12px; padding:20px; }
+.card h2 { color:#7eb8da; font-size:15px; margin-bottom:14px; text-transform:uppercase; letter-spacing:1px; }
+.grade-badge { display:inline-flex; align-items:center; justify-content:center; width:80px; height:80px;
+  border-radius:16px; font-size:36px; font-weight:bold; border:3px solid; }
+.findings-table { width:100%; border-collapse:collapse; margin-top:10px; }
+.findings-table th { background:#1e2640; color:#7eb8da; padding:10px 8px; text-align:left; font-size:12px; text-transform:uppercase; }
+.findings-table td { padding:8px; border-bottom:1px solid #1e2640; font-size:13px; }
+.findings-table tr:hover { background:rgba(126,184,218,0.05); }
+.search { width:100%; padding:10px 14px; background:#141828; border:1px solid #1e2640;
+  border-radius:8px; color:#e0e4f0; font-size:14px; margin-bottom:12px; }
+.search::placeholder { color:#8890a8; }
+.filter-btn { padding:4px 12px; border-radius:4px; border:1px solid #1e2640;
+  background:transparent; color:#8890a8; cursor:pointer; font-size:12px; margin:2px; }
+.filter-btn:hover, .filter-btn.active { background:#1e2640; color:#e0e4f0; }
+.stat { text-align:center; }
+.stat-num { font-size:36px; font-weight:bold; color:#bb86fc; }
+.stat-label { font-size:12px; color:#8890a8; margin-top:4px; }
+code { background:rgba(126,184,218,0.1); padding:1px 5px; border-radius:3px; font-size:12px; }
+</style></head><body>
+<div class="container">
+
+<div class="header">
+  <h1>Ψ PQC-SCANNER DASHBOARD</h1>
+  <div class="subtitle">Enigma Post-Quantum Cryptography Migration Scanner v4.0.0</div>
+  <div class="subtitle" style="margin-top:4px">Scan: C:\Users\jbro1\Desktop\Enigma\demo\sample_vulnerable_project | 2026-03-23</div>
+</div>
+
+<div class="grid" style="grid-template-columns:repeat(4,1fr)">
+  <div class="card stat">
+    <div class="stat-num" style="color:#ff4444">100</div>
+    <div class="stat-label">Risk Score</div>
+  </div>
+  <div class="card stat">
+    <div class="grade-badge" style="color:#ff4444;border-color:#ff4444">F</div>
+    <div class="stat-label" style="margin-top:8px">Readiness Grade</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-num">30</div>
+    <div class="stat-label">Findings</div>
+  </div>
+  <div class="card stat">
+    <div class="stat-num">6</div>
+    <div class="stat-label">Files Scanned</div>
+  </div>
+</div>
+
+<div class="grid" style="grid-template-columns:1fr 1fr 1fr">
+  <div class="card" style="text-align:center">
+    <h2>Risk Gauge</h2>
+    <svg width="180" height="200" viewBox="0 0 180 200">
+  <path d="M 36.4 145.0 A 70 70 0 1 1 143.6 145.0" fill="none" stroke="#1e2640" stroke-width="16" stroke-linecap="round"/>
+  <path d="M 36.4 145.0 A 70 70 0 1 1 143.6 145.0" fill="none" stroke="#ff4444" stroke-width="16" stroke-linecap="round"/>
+  <text x="90" y="95" text-anchor="middle" fill="#ff4444" font-size="42" font-weight="bold" font-family="monospace">100</text>
+  <text x="90" y="120" text-anchor="middle" fill="#8890a8" font-size="13" font-family="sans-serif">Risk Score</text>
+</svg>
+  </div>
+  <div class="card">
+    <h2>Algorithm Distribution</h2>
+    <div style="display:flex;align-items:center;gap:16px">
+      <svg width="200" height="200" viewBox="0 0 200 200">
+  <path d="M 100.0 30.0 A 70 70 0 0 1 169.6 92.7 L 144.8 95.3 A 45 45 0 0 0 100.0 55.0 Z" fill="#ff4444" opacity="0.85"/><path d="M 169.6 92.7 A 70 70 0 0 1 141.1 156.6 L 126.5 136.4 A 45 45 0 0 0 144.8 95.3 Z" fill="#ff8800" opacity="0.85"/><path d="M 141.1 156.6 A 70 70 0 0 1 85.4 168.5 L 90.6 144.0 A 45 45 0 0 0 126.5 136.4 Z" fill="#ffcc00" opacity="0.85"/><path d="M 85.4 168.5 A 70 70 0 0 1 48.0 146.8 L 66.6 130.1 A 45 45 0 0 0 90.6 144.0 Z" fill="#7eb8da" opacity="0.85"/><path d="M 48.0 146.8 A 70 70 0 0 1 33.4 121.6 L 57.2 113.9 A 45 45 0 0 0 66.6 130.1 Z" fill="#bb86fc" opacity="0.85"/><path d="M 33.4 121.6 A 70 70 0 0 1 30.4 92.7 L 55.2 95.3 A 45 45 0 0 0 57.2 113.9 Z" fill="#d4af37" opacity="0.85"/><path d="M 30.4 92.7 A 70 70 0 0 1 33.4 78.4 L 57.2 86.1 A 45 45 0 0 0 55.2 95.3 Z" fill="#ff6b9d" opacity="0.85"/><path d="M 33.4 78.4 A 70 70 0 0 1 39.4 65.0 L 61.0 77.5 A 45 45 0 0 0 57.2 86.1 Z" fill="#c084fc" opacity="0.85"/><path d="M 39.4 65.0 A 70 70 0 0 1 48.0 53.2 L 66.6 69.9 A 45 45 0 0 0 61.0 77.5 Z" fill="#67e8f9" opacity="0.85"/><path d="M 48.0 53.2 A 70 70 0 0 1 58.9 43.4 L 73.5 63.6 A 45 45 0 0 0 66.6 69.9 Z" fill="#fbbf24" opacity="0.85"/><path d="M 58.9 43.4 A 70 70 0 0 1 71.5 36.1 L 81.7 58.9 A 45 45 0 0 0 73.5 63.6 Z" fill="#a3e635" opacity="0.85"/><path d="M 71.5 36.1 A 70 70 0 0 1 85.4 31.5 L 90.6 56.0 A 45 45 0 0 0 81.7 58.9 Z" fill="#f87171" opacity="0.85"/><path d="M 85.4 31.5 A 70 70 0 0 1 100.0 30.0 L 100.0 55.0 A 45 45 0 0 0 90.6 56.0 Z" fill="#ff4444" opacity="0.85"/>
+  <text x="100" y="98" text-anchor="middle" fill="#e0e4f0" font-size="22" font-weight="bold" font-family="monospace">30</text>
+  <text x="100" y="116" text-anchor="middle" fill="#8890a8" font-size="11" font-family="sans-serif">findings</text>
+</svg>
+      <div><div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#ff4444;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">RSA: 7 (23%)</span></div>
+<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#ff8800;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">ECDSA: 5 (17%)</span></div>
+<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#ffcc00;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">3DES: 4 (13%)</span></div>
+<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#7eb8da;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">ECDH: 3 (10%)</span></div>
+<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#bb86fc;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">DH/ECDH: 2 (7%)</span></div>
+<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#d4af37;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">SHA-1: 2 (7%)</span></div>
+<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#ff6b9d;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">RSA/ECDSA: 1 (3%)</span></div>
+<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#c084fc;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">MD5: 1 (3%)</span></div>
+<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#67e8f9;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">Old TLS: 1 (3%)</span></div>
+<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#fbbf24;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">Weak cipher: 1 (3%)</span></div>
+<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#a3e635;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">ECDSA/DSA: 1 (3%)</span></div>
+<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#f87171;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">SHA-1/MD5: 1 (3%)</span></div>
+<div style="display:flex;align-items:center;gap:6px;margin:2px 0"><span style="width:10px;height:10px;background:#ff4444;border-radius:2px;display:inline-block"></span><span style="font-size:12px;color:#8890a8">DH: 1 (3%)</span></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Severity Breakdown</h2>
+    <div style="display:flex;align-items:center;gap:10px;margin:6px 0">
+  <span style="width:70px;font-size:12px;color:#ff4444;font-weight:bold;text-align:right">CRITICAL</span>
+  <div style="flex:1;background:#1e2640;border-radius:4px;height:22px;overflow:hidden">
+    <div style="width:100.0%;background:#ff4444;height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px">
+      <span style="font-size:12px;color:#fff;font-weight:bold">19</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0">
+  <span style="width:70px;font-size:12px;color:#ff8800;font-weight:bold;text-align:right">HIGH</span>
+  <div style="flex:1;background:#1e2640;border-radius:4px;height:22px;overflow:hidden">
+    <div style="width:42.10526315789473%;background:#ff8800;height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px">
+      <span style="font-size:12px;color:#fff;font-weight:bold">8</span>
+    </div>
+  </div>
+</div>
+<div style="display:flex;align-items:center;gap:10px;margin:6px 0">
+  <span style="width:70px;font-size:12px;color:#ffcc00;font-weight:bold;text-align:right">MEDIUM</span>
+  <div style="flex:1;background:#1e2640;border-radius:4px;height:22px;overflow:hidden">
+    <div style="width:15.789473684210526%;background:#ffcc00;height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px">
+      <span style="font-size:12px;color:#fff;font-weight:bold">3</span>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+<div class="grid" style="grid-template-columns:1fr 1fr">
+  <div class="card">
+    <h2>CNSA 2.0 Deadlines</h2>
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="width:100px;color:#d4af37;font-weight:bold">SHA-1</span>
+  <span style="color:#ff4444;font-weight:bold;width:180px">OVERDUE by 82 days</span>
+  <span style="color:#8890a8;font-size:12px">2025-12-31 [OVERDUE]</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="width:100px;color:#d4af37;font-weight:bold">MD5</span>
+  <span style="color:#ff4444;font-weight:bold;width:180px">OVERDUE by 82 days</span>
+  <span style="color:#8890a8;font-size:12px">2025-12-31 [OVERDUE]</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="width:100px;color:#d4af37;font-weight:bold">3DES</span>
+  <span style="color:#ff4444;font-weight:bold;width:180px">OVERDUE by 82 days</span>
+  <span style="color:#8890a8;font-size:12px">2025-12-31 [OVERDUE]</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="width:100px;color:#d4af37;font-weight:bold">DH</span>
+  <span style="color:#00cc66;font-weight:bold;width:180px">1744 days</span>
+  <span style="color:#8890a8;font-size:12px">2030-12-31 [DISTANT]</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="width:100px;color:#d4af37;font-weight:bold">RSA</span>
+  <span style="color:#00cc66;font-weight:bold;width:180px">1744 days</span>
+  <span style="color:#8890a8;font-size:12px">2030-12-31 [DISTANT]</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="width:100px;color:#d4af37;font-weight:bold">ECDH</span>
+  <span style="color:#00cc66;font-weight:bold;width:180px">1744 days</span>
+  <span style="color:#8890a8;font-size:12px">2030-12-31 [DISTANT]</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="width:100px;color:#d4af37;font-weight:bold">ECDSA</span>
+  <span style="color:#00cc66;font-weight:bold;width:180px">2840 days</span>
+  <span style="color:#8890a8;font-size:12px">2033-12-31 [DISTANT]</span>
+</div>
+
+  </div>
+  <div class="card">
+    <h2>Recommendations</h2>
+    <div style="padding:4px 0;color:#e0e4f0;font-size:13px">1. CRITICAL: Replace Shor-vulnerable algorithms (DH, DH/ECDH, ECDH, ECDSA, ECDSA/DSA, RSA, RSA/ECDSA) with NIST PQC standards (ML-KEM, ML-DSA, SLH-DSA)</div>
+<div style="padding:4px 0;color:#e0e4f0;font-size:13px">2. OVERDUE: 3 algorithm(s) past CNSA 2.0 deadline — immediate action required</div>
+<div style="padding:4px 0;color:#e0e4f0;font-size:13px">3. Replace MD5 with SHA-256 (deterministic fix available)</div>
+<div style="padding:4px 0;color:#e0e4f0;font-size:13px">4. Replace SHA-1 with SHA-256 (deterministic fix available)</div>
+<div style="padding:4px 0;color:#e0e4f0;font-size:13px">5. Replace deprecated ciphers with AES-256-GCM</div>
+
+  </div>
+</div>
+
+<div class="card" style="margin:16px 0">
+  <h2>Auto-Fix Suggestions</h2>
+  <div style="padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="color:#00cc66;font-weight:bold;font-size:11px">[SAFE]</span>
+  <span style="color:#d4af37">SHA-1 → SHA-256</span>
+  <div style="font-size:12px;color:#8890a8;margin-top:4px">SHA-1 is collision-broken since 2017. Upgrade to SHA-256.</div>
+</div>
+<div style="padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="color:#00cc66;font-weight:bold;font-size:11px">[SAFE]</span>
+  <span style="color:#d4af37">MD5 → SHA-256</span>
+  <div style="font-size:12px;color:#8890a8;margin-top:4px">MD5 is completely broken. SHA-256 is the minimum secure hash.</div>
+</div>
+<div style="padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="color:#00cc66;font-weight:bold;font-size:11px">[SAFE]</span>
+  <span style="color:#d4af37">3DES → AES-256</span>
+  <div style="font-size:12px;color:#8890a8;margin-top:4px">DES deprecated. Use AES.</div>
+</div>
+<div style="padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="color:#00cc66;font-weight:bold;font-size:11px">[SAFE]</span>
+  <span style="color:#d4af37">3DES → AES-256</span>
+  <div style="font-size:12px;color:#8890a8;margin-top:4px">Replace DES with AES.</div>
+</div>
+<div style="padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="color:#00cc66;font-weight:bold;font-size:11px">[SAFE]</span>
+  <span style="color:#d4af37">Old TLS → TLS 1.3</span>
+  <div style="font-size:12px;color:#8890a8;margin-top:4px">TLS 1.0 is deprecated. Use TLS 1.2+.</div>
+</div>
+<div style="padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="color:#00cc66;font-weight:bold;font-size:11px">[SAFE]</span>
+  <span style="color:#d4af37">SHA-1 → SHA-256</span>
+  <div style="font-size:12px;color:#8890a8;margin-top:4px">SHA-1 is collision-broken. Use SHA-256.</div>
+</div>
+<div style="padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="color:#00cc66;font-weight:bold;font-size:11px">[SAFE]</span>
+  <span style="color:#d4af37">SHA-1 → SHA-256</span>
+  <div style="font-size:12px;color:#8890a8;margin-top:4px">SHA-1 is collision-broken. Use SHA-256.</div>
+</div>
+<div style="padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="color:#ffcc00;font-weight:bold;font-size:11px">[REVIEW]</span>
+  <span style="color:#d4af37">RSA → ML-KEM-768 (hybrid)</span>
+  <div style="font-size:12px;color:#8890a8;margin-top:4px">RSA is broken by Shor&#x27;s algorithm. For key exchange, use ML-KEM-768 hybrid (classical + PQC). For si</div>
+</div>
+<div style="padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="color:#ffcc00;font-weight:bold;font-size:11px">[REVIEW]</span>
+  <span style="color:#d4af37">ECDSA → ML-DSA-65</span>
+  <div style="font-size:12px;color:#8890a8;margin-top:4px">ECDSA is broken by Shor&#x27;s algorithm. Replace with ML-DSA (FIPS 204) for digital signatures.
+NOTE: Re</div>
+</div>
+<div style="padding:8px 0;border-bottom:1px solid #1e2640">
+  <span style="color:#ffcc00;font-weight:bold;font-size:11px">[REVIEW]</span>
+  <span style="color:#d4af37">RSA → ML-KEM (via BouncyCastle)</span>
+  <div style="font-size:12px;color:#8890a8;margin-top:4px">RSA key generation must be replaced with ML-KEM for key exchange or ML-DSA for signatures. BouncyCas</div>
+</div>
+
+</div>
+
+<div class="card" style="margin:16px 0">
+  <h2>All Findings</h2>
+  <input type="text" class="search" id="findingSearch" placeholder="Search findings (algorithm, file, code...)">
+  <div style="margin-bottom:10px">
+    <button class="filter-btn active" onclick="filterSev('ALL')">All</button>
+    <button class="filter-btn" onclick="filterSev('CRITICAL')">Critical</button>
+    <button class="filter-btn" onclick="filterSev('HIGH')">High</button>
+    <button class="filter-btn" onclick="filterSev('MEDIUM')">Medium</button>
+    <button class="filter-btn" onclick="filterSev('LOW')">Low</button>
+  </div>
+  <table class="findings-table">
+    <thead><tr><th>Severity</th><th>Algorithm</th><th>Code</th><th>Location</th><th>PQC Replacement</th></tr></thead>
+    <tbody id="findingsBody">
+<tr class="finding-row" data-severity="CRITICAL" data-algo="RSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">RSA</td>
+  <td><code style="font-size:11px;color:#8890a8">crypto.generateKeyPair(&#x27;rsa&#x27;, {</code></td>
+  <td style="font-size:12px">api.js:5</td>
+  <td style="font-size:11px;color:#7eb8da">ML-KEM-768 or ML-DSA-65</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="DH/ECDH">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">DH/ECDH</td>
+  <td><code style="font-size:11px;color:#8890a8">const dh = crypto.createDiffieHellman(2048);</code></td>
+  <td style="font-size:12px">api.js:14</td>
+  <td style="font-size:11px;color:#7eb8da">Consult NIST PQC standards</td>
+</tr>
+<tr class="finding-row" data-severity="HIGH" data-algo="RSA/ECDSA">
+  <td style="color:#ff8800;font-weight:bold;width:80px">HIGH</td>
+  <td style="color:#d4af37">RSA/ECDSA</td>
+  <td><code style="font-size:11px;color:#8890a8">const sign = crypto.createSign(&#x27;SHA256&#x27;);</code></td>
+  <td style="font-size:12px">api.js:18</td>
+  <td style="font-size:11px;color:#7eb8da">Consult NIST PQC standards</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="DH/ECDH">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">DH/ECDH</td>
+  <td><code style="font-size:11px;color:#8890a8">const ecdh = crypto.createECDH(&#x27;secp256k1&#x27;);</code></td>
+  <td style="font-size:12px">api.js:22</td>
+  <td style="font-size:11px;color:#7eb8da">Consult NIST PQC standards</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="RSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">RSA</td>
+  <td><code style="font-size:11px;color:#8890a8">private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)</code></td>
+  <td style="font-size:12px">app.py:12</td>
+  <td style="font-size:11px;color:#7eb8da">ML-KEM-768 or ML-DSA-65</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="ECDSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">ECDSA</td>
+  <td><code style="font-size:11px;color:#8890a8">ec_key = ec.generate_private_key(ec.SECP256R1())</code></td>
+  <td style="font-size:12px">app.py:23</td>
+  <td style="font-size:11px;color:#7eb8da">ML-DSA-65</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="ECDSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">ECDSA</td>
+  <td><code style="font-size:11px;color:#8890a8">signature = ec_key.sign(b&quot;document to sign&quot;, ec.ECDSA(hashes.SHA256()))</code></td>
+  <td style="font-size:12px">app.py:24</td>
+  <td style="font-size:11px;color:#7eb8da">ML-DSA-65</td>
+</tr>
+<tr class="finding-row" data-severity="HIGH" data-algo="3DES">
+  <td style="color:#ff8800;font-weight:bold;width:80px">HIGH</td>
+  <td style="color:#d4af37">3DES</td>
+  <td><code style="font-size:11px;color:#8890a8">from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes</code></td>
+  <td style="font-size:12px">app.py:27</td>
+  <td style="font-size:11px;color:#7eb8da">AES-256-GCM</td>
+</tr>
+<tr class="finding-row" data-severity="HIGH" data-algo="3DES">
+  <td style="color:#ff8800;font-weight:bold;width:80px">HIGH</td>
+  <td style="color:#d4af37">3DES</td>
+  <td><code style="font-size:11px;color:#8890a8">cipher = Cipher(algorithms.AES(aes_key), modes.GCM(os.urandom(12)))</code></td>
+  <td style="font-size:12px">app.py:29</td>
+  <td style="font-size:11px;color:#7eb8da">AES-256-GCM</td>
+</tr>
+<tr class="finding-row" data-severity="MEDIUM" data-algo="SHA-1">
+  <td style="color:#ffcc00;font-weight:bold;width:80px">MEDIUM</td>
+  <td style="color:#d4af37">SHA-1</td>
+  <td><code style="font-size:11px;color:#8890a8">legacy_hash = hashlib.sha1(b&quot;legacy data fingerprint&quot;)</code></td>
+  <td style="font-size:12px">app.py:32</td>
+  <td style="font-size:11px;color:#7eb8da">SHA-256 or SHA-3</td>
+</tr>
+<tr class="finding-row" data-severity="HIGH" data-algo="MD5">
+  <td style="color:#ff8800;font-weight:bold;width:80px">HIGH</td>
+  <td style="color:#d4af37">MD5</td>
+  <td><code style="font-size:11px;color:#8890a8">old_checksum = hashlib.md5(b&quot;file integrity check&quot;)</code></td>
+  <td style="font-size:12px">app.py:35</td>
+  <td style="font-size:11px;color:#7eb8da">SHA-256 or SHA-3</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="RSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">RSA</td>
+  <td><code style="font-size:11px;color:#8890a8">&quot;crypto/rsa&quot;</code></td>
+  <td style="font-size:12px">crypto_utils.go:5</td>
+  <td style="font-size:11px;color:#7eb8da">ML-KEM-768 or ML-DSA-65</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="ECDSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">ECDSA</td>
+  <td><code style="font-size:11px;color:#8890a8">&quot;crypto/ecdsa&quot;</code></td>
+  <td style="font-size:12px">crypto_utils.go:6</td>
+  <td style="font-size:11px;color:#7eb8da">ML-DSA-65</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="ECDH">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">ECDH</td>
+  <td><code style="font-size:11px;color:#8890a8">&quot;crypto/elliptic&quot;</code></td>
+  <td style="font-size:12px">crypto_utils.go:7</td>
+  <td style="font-size:11px;color:#7eb8da">ML-KEM-768</td>
+</tr>
+<tr class="finding-row" data-severity="HIGH" data-algo="3DES">
+  <td style="color:#ff8800;font-weight:bold;width:80px">HIGH</td>
+  <td style="color:#d4af37">3DES</td>
+  <td><code style="font-size:11px;color:#8890a8">&quot;crypto/des&quot;</code></td>
+  <td style="font-size:12px">crypto_utils.go:9</td>
+  <td style="font-size:11px;color:#7eb8da">AES-256-GCM</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="RSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">RSA</td>
+  <td><code style="font-size:11px;color:#8890a8">key, _ := rsa.GenerateKey(rand.Reader, 2048)</code></td>
+  <td style="font-size:12px">crypto_utils.go:14</td>
+  <td style="font-size:11px;color:#7eb8da">ML-KEM-768 or ML-DSA-65</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="ECDSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">ECDSA</td>
+  <td><code style="font-size:11px;color:#8890a8">ecKey, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)</code></td>
+  <td style="font-size:12px">crypto_utils.go:18</td>
+  <td style="font-size:11px;color:#7eb8da">ML-DSA-65</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="ECDH">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">ECDH</td>
+  <td><code style="font-size:11px;color:#8890a8">ecKey, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)</code></td>
+  <td style="font-size:12px">crypto_utils.go:18</td>
+  <td style="font-size:11px;color:#7eb8da">ML-KEM-768</td>
+</tr>
+<tr class="finding-row" data-severity="HIGH" data-algo="3DES">
+  <td style="color:#ff8800;font-weight:bold;width:80px">HIGH</td>
+  <td style="color:#d4af37">3DES</td>
+  <td><code style="font-size:11px;color:#8890a8">block, _ := des.NewCipher([]byte(&quot;8byteky&quot;))</code></td>
+  <td style="font-size:12px">crypto_utils.go:22</td>
+  <td style="font-size:11px;color:#7eb8da">AES-256-GCM</td>
+</tr>
+<tr class="finding-row" data-severity="HIGH" data-algo="Old TLS">
+  <td style="color:#ff8800;font-weight:bold;width:80px">HIGH</td>
+  <td style="color:#d4af37">Old TLS</td>
+  <td><code style="font-size:11px;color:#8890a8">ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</code></td>
+  <td style="font-size:12px">nginx.conf:6</td>
+  <td style="font-size:11px;color:#7eb8da">Consult NIST PQC standards</td>
+</tr>
+<tr class="finding-row" data-severity="HIGH" data-algo="Weak cipher">
+  <td style="color:#ff8800;font-weight:bold;width:80px">HIGH</td>
+  <td style="color:#d4af37">Weak cipher</td>
+  <td><code style="font-size:11px;color:#8890a8">ssl_ciphers RC4:DES:3DES:AES128-SHA:AES256-SHA;</code></td>
+  <td style="font-size:12px">nginx.conf:7</td>
+  <td style="font-size:11px;color:#7eb8da">Consult NIST PQC standards</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="RSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">RSA</td>
+  <td><code style="font-size:11px;color:#8890a8">KeyPairGenerator kpg = KeyPairGenerator.getInstance(&quot;RSA&quot;);</code></td>
+  <td style="font-size:12px">server.java:8</td>
+  <td style="font-size:11px;color:#7eb8da">ML-KEM-768 or ML-DSA-65</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="RSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">RSA</td>
+  <td><code style="font-size:11px;color:#8890a8">Cipher cipher = Cipher.getInstance(&quot;RSA/ECB/PKCS1Padding&quot;);</code></td>
+  <td style="font-size:12px">server.java:13</td>
+  <td style="font-size:11px;color:#7eb8da">ML-KEM-768 or ML-DSA-65</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="ECDSA/DSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">ECDSA/DSA</td>
+  <td><code style="font-size:11px;color:#8890a8">KeyPairGenerator ecKpg = KeyPairGenerator.getInstance(&quot;EC&quot;);</code></td>
+  <td style="font-size:12px">server.java:17</td>
+  <td style="font-size:11px;color:#7eb8da">Consult NIST PQC standards</td>
+</tr>
+<tr class="finding-row" data-severity="MEDIUM" data-algo="SHA-1/MD5">
+  <td style="color:#ffcc00;font-weight:bold;width:80px">MEDIUM</td>
+  <td style="color:#d4af37">SHA-1/MD5</td>
+  <td><code style="font-size:11px;color:#8890a8">MessageDigest md = MessageDigest.getInstance(&quot;SHA-1&quot;);</code></td>
+  <td style="font-size:12px">server.java:21</td>
+  <td style="font-size:11px;color:#7eb8da">Consult NIST PQC standards</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="DH">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">DH</td>
+  <td><code style="font-size:11px;color:#8890a8">const dh = crypto.createDiffieHellman(2048);</code></td>
+  <td style="font-size:12px">api.js:14</td>
+  <td style="font-size:11px;color:#7eb8da">ML-KEM-768</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="ECDH">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">ECDH</td>
+  <td><code style="font-size:11px;color:#8890a8">const ecdh = crypto.createECDH(&#x27;secp256k1&#x27;);</code></td>
+  <td style="font-size:12px">api.js:22</td>
+  <td style="font-size:11px;color:#7eb8da">ML-KEM-768</td>
+</tr>
+<tr class="finding-row" data-severity="MEDIUM" data-algo="SHA-1">
+  <td style="color:#ffcc00;font-weight:bold;width:80px">MEDIUM</td>
+  <td style="color:#d4af37">SHA-1</td>
+  <td><code style="font-size:11px;color:#8890a8">MessageDigest md = MessageDigest.getInstance(&quot;SHA-1&quot;);</code></td>
+  <td style="font-size:12px">server.java:21</td>
+  <td style="font-size:11px;color:#7eb8da">SHA-256 or SHA-3</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="RSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">RSA</td>
+  <td><code style="font-size:11px;color:#8890a8">from cryptography.hazmat.primitives.asymmetric import rsa</code></td>
+  <td style="font-size:12px">app.py:5</td>
+  <td style="font-size:11px;color:#7eb8da">ML-KEM-768 or ML-DSA-65</td>
+</tr>
+<tr class="finding-row" data-severity="CRITICAL" data-algo="ECDSA">
+  <td style="color:#ff4444;font-weight:bold;width:80px">CRITICAL</td>
+  <td style="color:#d4af37">ECDSA</td>
+  <td><code style="font-size:11px;color:#8890a8">from cryptography.hazmat.primitives.asymmetric import ec</code></td>
+  <td style="font-size:12px">app.py:5</td>
+  <td style="font-size:11px;color:#7eb8da">ML-DSA-65</td>
+</tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align:center;padding:20px;color:#8890a8;font-size:12px">
+  Generated by Enigma pqc-scanner v4.0.0 | Ψ Quantum Shield | CONFIDENTIAL
+</div>
+
+</div>
+
+<script>
+const searchInput = document.getElementById('findingSearch');
+const rows = document.querySelectorAll('.finding-row');
+let activeSev = 'ALL';
+
+searchInput.addEventListener('input', () => applyFilters());
+
+function filterSev(sev) {
+  activeSev = sev;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  const q = searchInput.value.toLowerCase();
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    const sev = row.dataset.severity;
+    const matchSearch = !q || text.includes(q);
+    const matchSev = activeSev === 'ALL' || sev === activeSev;
+    row.style.display = (matchSearch && matchSev) ? '' : 'none';
+  });
+}
+</script>
+</body></html>

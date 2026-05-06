@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html><head><title>PQC Scanner Report</title>
+<style>
+body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #e0e0e0; padding: 20px; }
+h1 { color: #bb86fc; } h2 { color: #03dac6; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+th { background: #2d2d44; color: #bb86fc; padding: 10px; text-align: left; }
+td { padding: 8px; border-bottom: 1px solid #333; }
+code { background: #2d2d44; padding: 2px 6px; border-radius: 3px; font-size: 12px; }
+.score { font-size: 48px; color: #ff4444; }
+.stat { display: inline-block; margin: 10px 20px; text-align: center; }
+.stat-num { font-size: 32px; color: #bb86fc; }
+</style></head><body>
+<h1>PQC-SCANNER Report</h1>
+<p>Scan: C:\Users\jbro1\Desktop\Enigma\phases\phase2_classical | Date: 2026-03-22T06:58:07.415540</p>
+<div class="stat"><div class="score">100</div><div>Risk Score</div></div>
+<div class="stat"><div class="stat-num">156</div><div>Findings</div></div>
+<div class="stat"><div class="stat-num">12</div><div>Files Scanned</div></div>
+<div class="stat"><div class="stat-num">79</div><div>Critical</div></div>
+<h2>Findings</h2>
+<table><tr><th>Severity</th><th>ID</th><th>Algorithm</th><th>Code</th><th>Location</th><th>PQC Replacement</th></tr>
+
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0001</td>
+            <td>AES-128</td>
+            <td><code>Implements FIPS 197 (AES-128/192/256), SP 800-38A (ECB/CBC/CTR).</code></td>
+            <td>aes.py:3</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0002</td>
+            <td>ECDSA</td>
+            <td><code>Point arithmetic, ECDH, ECDSA over secp256k1 and NIST P-256.</code></td>
+            <td>ecc.py:3</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0003</td>
+            <td>ECDH</td>
+            <td><code>Point arithmetic, ECDH, ECDSA over secp256k1 and NIST P-256.</code></td>
+            <td>ecc.py:3</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0004</td>
+            <td>ECDH</td>
+            <td><code># ECDH KEY EXCHANGE</code></td>
+            <td>ecc.py:150</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0005</td>
+            <td>ECDH</td>
+            <td><code>def ecdh_keygen(curve: Dict) -> Tuple[int, Point]:</code></td>
+            <td>ecc.py:153</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0006</td>
+            <td>ECDH</td>
+            <td><code>"""Generate ECDH key pair. Returns (private_key, public_key)."""</code></td>
+            <td>ecc.py:154</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0007</td>
+            <td>ECDH</td>
+            <td><code>def ecdh_shared_secret(my_private: int, their_public: Point, curve: Dict) -> int</code></td>
+            <td>ecc.py:162</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0008</td>
+            <td>ECDH</td>
+            <td><code>"""Compute ECDH shared secret (x-coordinate of shared point)."""</code></td>
+            <td>ecc.py:163</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0009</td>
+            <td>ECDSA</td>
+            <td><code># ECDSA SIGNATURES</code></td>
+            <td>ecc.py:173</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0010</td>
+            <td>ECDSA</td>
+            <td><code>def ecdsa_sign(message: bytes, private_key: int, curve: Dict) -> Tuple[int, int]</code></td>
+            <td>ecc.py:187</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0011</td>
+            <td>ECDSA</td>
+            <td><code>"""Sign message using ECDSA with SHA-256. Returns (r, s)."""</code></td>
+            <td>ecc.py:188</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0012</td>
+            <td>ECDSA</td>
+            <td><code>def ecdsa_verify(message: bytes, signature: Tuple[int, int],</code></td>
+            <td>ecc.py:209</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0013</td>
+            <td>ECDSA</td>
+            <td><code>"""Verify ECDSA signature. Returns True if valid."""</code></td>
+            <td>ecc.py:211</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0014</td>
+            <td>RSA</td>
+            <td><code>class RSAPublicKey:</code></td>
+            <td>rsa.py:28</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0015</td>
+            <td>RSA</td>
+            <td><code>return f"RSAPublicKey(bits={self.key_size}, e={self.e})"</code></td>
+            <td>rsa.py:35</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0016</td>
+            <td>RSA</td>
+            <td><code>class RSAPrivateKey:</code></td>
+            <td>rsa.py:38</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0017</td>
+            <td>RSA</td>
+            <td><code>self.public_key = RSAPublicKey(n, e)</code></td>
+            <td>rsa.py:49</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0018</td>
+            <td>RSA</td>
+            <td><code>return f"RSAPrivateKey(bits={self.key_size})"</code></td>
+            <td>rsa.py:52</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0019</td>
+            <td>RSA</td>
+            <td><code>def generate_rsa_keypair(bits: int = 2048, e: int = 65537) -> Tuple[RSAPublicKey</code></td>
+            <td>rsa.py:55</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0020</td>
+            <td>RSA</td>
+            <td><code>pub = RSAPublicKey(n, e)</code></td>
+            <td>rsa.py:78</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0021</td>
+            <td>RSA</td>
+            <td><code>priv = RSAPrivateKey(n, e, d, p, q)</code></td>
+            <td>rsa.py:79</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0022</td>
+            <td>RSA</td>
+            <td><code>def _rsa_encrypt_raw(m: int, pub: RSAPublicKey) -> int:</code></td>
+            <td>rsa.py:87</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0023</td>
+            <td>RSA</td>
+            <td><code>def _rsa_decrypt_raw(c: int, priv: RSAPrivateKey) -> int:</code></td>
+            <td>rsa.py:91</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0024</td>
+            <td>RSA</td>
+            <td><code>def rsa_encrypt_pkcs1v15(message: bytes, pub: RSAPublicKey) -> bytes:</code></td>
+            <td>rsa.py:109</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0025</td>
+            <td>RSA</td>
+            <td><code>def rsa_decrypt_pkcs1v15(ciphertext: bytes, priv: RSAPrivateKey) -> bytes:</code></td>
+            <td>rsa.py:131</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0026</td>
+            <td>RSA</td>
+            <td><code>def rsa_encrypt_oaep(message: bytes, pub: RSAPublicKey,</code></td>
+            <td>rsa.py:167</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0027</td>
+            <td>RSA</td>
+            <td><code>def rsa_decrypt_oaep(ciphertext: bytes, priv: RSAPrivateKey,</code></td>
+            <td>rsa.py:193</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0028</td>
+            <td>RSA</td>
+            <td><code>def rsa_sign(message: bytes, priv: RSAPrivateKey) -> bytes:</code></td>
+            <td>rsa.py:241</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0029</td>
+            <td>RSA</td>
+            <td><code>def rsa_verify(message: bytes, signature: bytes, pub: RSAPublicKey) -> bool:</code></td>
+            <td>rsa.py:258</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0030</td>
+            <td>SHA-1</td>
+            <td><code>SHA1_H0 = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0]</code></td>
+            <td>sha256.py:164</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0031</td>
+            <td>SHA-1</td>
+            <td><code>def _sha1_f(t: int, b: int, c: int, d: int) -> int:</code></td>
+            <td>sha256.py:171</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0032</td>
+            <td>SHA-1</td>
+            <td><code>def _sha1_pad(message: bytes) -> bytes:</code></td>
+            <td>sha256.py:182</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0033</td>
+            <td>SHA-1</td>
+            <td><code>def _sha1_compress(H: List[int], block: bytes) -> List[int]:</code></td>
+            <td>sha256.py:192</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0034</td>
+            <td>SHA-1</td>
+            <td><code>temp = (_rotl(a, 5) + _sha1_f(t, b, c, d) + e + kt + W[t]) & MASK</code></td>
+            <td>sha256.py:211</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0035</td>
+            <td>SHA-1</td>
+            <td><code>def sha1(message: bytes) -> bytes:</code></td>
+            <td>sha256.py:225</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0036</td>
+            <td>SHA-1</td>
+            <td><code>padded = _sha1_pad(message)</code></td>
+            <td>sha256.py:227</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0037</td>
+            <td>SHA-1</td>
+            <td><code>H = list(SHA1_H0)</code></td>
+            <td>sha256.py:228</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0038</td>
+            <td>SHA-1</td>
+            <td><code>H = _sha1_compress(H, padded[i:i+64])</code></td>
+            <td>sha256.py:230</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0039</td>
+            <td>SHA-1</td>
+            <td><code>def sha1_hex(message: bytes) -> str:</code></td>
+            <td>sha256.py:234</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0040</td>
+            <td>SHA-1</td>
+            <td><code>return sha1(message).hex()</code></td>
+            <td>sha256.py:235</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0041</td>
+            <td>SHA-1</td>
+            <td><code>def sha1_with_state(message: bytes, state: List[int],</code></td>
+            <td>sha256.py:238</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0042</td>
+            <td>SHA-1</td>
+            <td><code>padded_full = _sha1_pad(fake_msg)</code></td>
+            <td>sha256.py:242</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0043</td>
+            <td>SHA-1</td>
+            <td><code>H = _sha1_compress(H, padded_full[i:i+64])</code></td>
+            <td>sha256.py:250</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0044</td>
+            <td>SHA-1</td>
+            <td><code>def hmac_sha1(key: bytes, message: bytes) -> bytes:</code></td>
+            <td>sha256.py:273</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0045</td>
+            <td>SHA-1</td>
+            <td><code>"""Compute HMAC-SHA1. Returns 20 bytes. For CryptoPals compatibility."""</code></td>
+            <td>sha256.py:274</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0046</td>
+            <td>SHA-1</td>
+            <td><code>key = sha1(key)</code></td>
+            <td>sha256.py:278</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0047</td>
+            <td>SHA-1</td>
+            <td><code>inner_hash = sha1(ipad + message)</code></td>
+            <td>sha256.py:284</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0048</td>
+            <td>SHA-1</td>
+            <td><code>return sha1(opad + inner_hash)</code></td>
+            <td>sha256.py:285</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0049</td>
+            <td>AES-128</td>
+            <td><code>def test_aes128_block():</code></td>
+            <td>test_aes.py:30</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0050</td>
+            <td>AES-128</td>
+            <td><code>"""FIPS 197 Appendix B: AES-128 test vector."""</code></td>
+            <td>test_aes.py:31</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0051</td>
+            <td>AES-128</td>
+            <td><code>assert ct == expected_ct, f"AES-128 encrypt: expected {expected_ct.hex()}, got {</code></td>
+            <td>test_aes.py:37</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0052</td>
+            <td>AES-128</td>
+            <td><code>assert decrypted == pt, f"AES-128 decrypt: expected {pt.hex()}, got {decrypted.h</code></td>
+            <td>test_aes.py:40</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0053</td>
+            <td>AES-128</td>
+            <td><code>print("  [PASS] AES-128 block -- FIPS 197 Appendix B")</code></td>
+            <td>test_aes.py:42</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0054</td>
+            <td>AES-128</td>
+            <td><code># SP 800-38A F.2.1 CBC-AES128 encrypt (first block)</code></td>
+            <td>test_aes.py:118</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0055</td>
+            <td>3DES</td>
+            <td><code>"""Random data encrypt/decrypt across all modes."""</code></td>
+            <td>test_aes.py:160</td>
+            <td>AES-256-GCM</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0056</td>
+            <td>3DES</td>
+            <td><code>print("  [PASS] Consistency -- 9 sizes x 4 modes = 36 roundtrips (128+256 bit)")</code></td>
+            <td>test_aes.py:179</td>
+            <td>AES-256-GCM</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0057</td>
+            <td>AES-128</td>
+            <td><code>test_sbox, test_aes128_block, test_aes192_block, test_aes256_block,</code></td>
+            <td>test_aes.py:188</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0058</td>
+            <td>ECDSA</td>
+            <td><code>Enigma Phase 2: ECC/ECDH/ECDSA test suite.</code></td>
+            <td>test_ecc.py:2</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0059</td>
+            <td>ECDH</td>
+            <td><code>Enigma Phase 2: ECC/ECDH/ECDSA test suite.</code></td>
+            <td>test_ecc.py:2</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0060</td>
+            <td>ECDH</td>
+            <td><code>ecdh_keygen, ecdh_shared_secret,</code></td>
+            <td>test_ecc.py:13</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0061</td>
+            <td>ECDSA</td>
+            <td><code>ecdsa_sign, ecdsa_verify,</code></td>
+            <td>test_ecc.py:14</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0062</td>
+            <td>ECDH</td>
+            <td><code>def test_ecdh_small_curve():</code></td>
+            <td>test_ecc.py:63</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0063</td>
+            <td>ECDH</td>
+            <td><code>"""ECDH on small curve from Agent C worked example."""</code></td>
+            <td>test_ecc.py:64</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0064</td>
+            <td>ECDH</td>
+            <td><code>assert alice_secret == bob_secret, "ECDH shared secrets don't match"</code></td>
+            <td>test_ecc.py:79</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0065</td>
+            <td>ECDH</td>
+            <td><code>print("  [PASS] ECDH small curve -- Alice(3) + Bob(5) = shared (5,2)")</code></td>
+            <td>test_ecc.py:82</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0066</td>
+            <td>ECDH</td>
+            <td><code>def test_ecdh_secp256k1():</code></td>
+            <td>test_ecc.py:145</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0067</td>
+            <td>ECDH</td>
+            <td><code>"""Full ECDH key exchange on secp256k1."""</code></td>
+            <td>test_ecc.py:146</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0068</td>
+            <td>ECDH</td>
+            <td><code>alice_priv, alice_pub = ecdh_keygen(curve)</code></td>
+            <td>test_ecc.py:149</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0069</td>
+            <td>ECDH</td>
+            <td><code>bob_priv, bob_pub = ecdh_keygen(curve)</code></td>
+            <td>test_ecc.py:150</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0070</td>
+            <td>ECDH</td>
+            <td><code>alice_secret = ecdh_shared_secret(alice_priv, bob_pub, curve)</code></td>
+            <td>test_ecc.py:155</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0071</td>
+            <td>ECDH</td>
+            <td><code>bob_secret = ecdh_shared_secret(bob_priv, alice_pub, curve)</code></td>
+            <td>test_ecc.py:156</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0072</td>
+            <td>ECDH</td>
+            <td><code>assert alice_secret == bob_secret, "ECDH shared secrets don't match"</code></td>
+            <td>test_ecc.py:158</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0073</td>
+            <td>ECDH</td>
+            <td><code>print("  [PASS] ECDH secp256k1 -- full key exchange, secrets match")</code></td>
+            <td>test_ecc.py:161</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0074</td>
+            <td>ECDSA</td>
+            <td><code>def test_ecdsa_secp256k1():</code></td>
+            <td>test_ecc.py:164</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0075</td>
+            <td>ECDSA</td>
+            <td><code>"""ECDSA sign/verify on secp256k1."""</code></td>
+            <td>test_ecc.py:165</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0076</td>
+            <td>ECDH</td>
+            <td><code>priv, pub = ecdh_keygen(curve)  # reuse keygen for key pair</code></td>
+            <td>test_ecc.py:168</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0077</td>
+            <td>ECDSA</td>
+            <td><code>msg = b"Hello ECDSA on secp256k1!"</code></td>
+            <td>test_ecc.py:170</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0078</td>
+            <td>ECDSA</td>
+            <td><code>sig = ecdsa_sign(msg, priv, curve)</code></td>
+            <td>test_ecc.py:171</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0079</td>
+            <td>ECDSA</td>
+            <td><code>assert ecdsa_verify(msg, sig, pub, curve), "Valid signature should verify"</code></td>
+            <td>test_ecc.py:175</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0080</td>
+            <td>ECDSA</td>
+            <td><code>assert not ecdsa_verify(b"Wrong message", sig, pub, curve), "Wrong msg should fa</code></td>
+            <td>test_ecc.py:176</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0081</td>
+            <td>ECDSA</td>
+            <td><code>assert not ecdsa_verify(msg, (r + 1, s), pub, curve), "Tampered r should fail"</code></td>
+            <td>test_ecc.py:177</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0082</td>
+            <td>ECDSA</td>
+            <td><code>print("  [PASS] ECDSA secp256k1 -- sign/verify + 2 negative tests")</code></td>
+            <td>test_ecc.py:179</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0083</td>
+            <td>ECDSA</td>
+            <td><code>def test_ecdsa_p256():</code></td>
+            <td>test_ecc.py:182</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0084</td>
+            <td>ECDSA</td>
+            <td><code>"""ECDSA sign/verify on P-256."""</code></td>
+            <td>test_ecc.py:183</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0085</td>
+            <td>ECDH</td>
+            <td><code>priv, pub = ecdh_keygen(curve)</code></td>
+            <td>test_ecc.py:186</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0086</td>
+            <td>ECDSA</td>
+            <td><code>sig = ecdsa_sign(msg, priv, curve)</code></td>
+            <td>test_ecc.py:189</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0087</td>
+            <td>ECDSA</td>
+            <td><code>assert ecdsa_verify(msg, sig, pub, curve), f"ECDSA P-256 failed for {len(msg)}-b</code></td>
+            <td>test_ecc.py:190</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0088</td>
+            <td>ECDSA</td>
+            <td><code>print("  [PASS] ECDSA P-256 -- 3 messages signed and verified")</code></td>
+            <td>test_ecc.py:192</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0089</td>
+            <td>ECDSA</td>
+            <td><code>def test_ecdsa_cross_key():</code></td>
+            <td>test_ecc.py:195</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0090</td>
+            <td>ECDH</td>
+            <td><code>priv1, pub1 = ecdh_keygen(curve)</code></td>
+            <td>test_ecc.py:198</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0091</td>
+            <td>ECDH</td>
+            <td><code>_, pub2 = ecdh_keygen(curve)</code></td>
+            <td>test_ecc.py:199</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0092</td>
+            <td>ECDSA</td>
+            <td><code>sig = ecdsa_sign(msg, priv1, curve)</code></td>
+            <td>test_ecc.py:202</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0093</td>
+            <td>ECDSA</td>
+            <td><code>assert not ecdsa_verify(msg, sig, pub2, curve), "Cross-key should fail"</code></td>
+            <td>test_ecc.py:203</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0094</td>
+            <td>ECDSA</td>
+            <td><code>print("  [PASS] ECDSA cross-key rejection")</code></td>
+            <td>test_ecc.py:205</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0095</td>
+            <td>ECDSA</td>
+            <td><code>print("  ENIGMA Phase 2 -- ECC/ECDH/ECDSA Test Suite")</code></td>
+            <td>test_ecc.py:210</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0096</td>
+            <td>ECDH</td>
+            <td><code>print("  ENIGMA Phase 2 -- ECC/ECDH/ECDSA Test Suite")</code></td>
+            <td>test_ecc.py:210</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0097</td>
+            <td>ECDH</td>
+            <td><code>test_ecdh_small_curve,</code></td>
+            <td>test_ecc.py:216</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0098</td>
+            <td>ECDH</td>
+            <td><code>test_ecdh_secp256k1,</code></td>
+            <td>test_ecc.py:220</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0099</td>
+            <td>ECDSA</td>
+            <td><code>test_ecdsa_secp256k1,</code></td>
+            <td>test_ecc.py:221</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0100</td>
+            <td>ECDSA</td>
+            <td><code>test_ecdsa_p256,</code></td>
+            <td>test_ecc.py:222</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0101</td>
+            <td>ECDSA</td>
+            <td><code>test_ecdsa_cross_key,</code></td>
+            <td>test_ecc.py:223</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0102</td>
+            <td>RSA</td>
+            <td><code>RSAPublicKey, RSAPrivateKey, _rsa_encrypt_raw, _rsa_decrypt_raw,</code></td>
+            <td>test_rsa.py:12</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0103</td>
+            <td>SHA-1</td>
+            <td><code>sha256, sha256_hex, sha1, sha1_hex,</code></td>
+            <td>test_sha256.py:10</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0104</td>
+            <td>SHA-1</td>
+            <td><code>hmac_sha256, hmac_sha1, merkle_root,</code></td>
+            <td>test_sha256.py:11</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0105</td>
+            <td>SHA-1</td>
+            <td><code>def test_sha1():</code></td>
+            <td>test_sha256.py:43</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0106</td>
+            <td>SHA-1</td>
+            <td><code>result = sha1_hex(msg)</code></td>
+            <td>test_sha256.py:52</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0107</td>
+            <td>SHA-1</td>
+            <td><code>ours = sha1_hex(msg)</code></td>
+            <td>test_sha256.py:57</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0108</td>
+            <td>SHA-1</td>
+            <td><code>theirs = hashlib.sha1(msg).hexdigest()</code></td>
+            <td>test_sha256.py:58</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0109</td>
+            <td>SHA-1</td>
+            <td><code>def test_hmac_sha1():</code></td>
+            <td>test_sha256.py:99</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0110</td>
+            <td>SHA-1</td>
+            <td><code>"""Cross-check HMAC-SHA1 with stdlib."""</code></td>
+            <td>test_sha256.py:100</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0111</td>
+            <td>SHA-1</td>
+            <td><code>ours = hmac_sha1(key, msg)</code></td>
+            <td>test_sha256.py:102</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0112</td>
+            <td>SHA-1</td>
+            <td><code>theirs = hmac_stdlib.new(key, msg, hashlib.sha1).digest()</code></td>
+            <td>test_sha256.py:103</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0113</td>
+            <td>SHA-1</td>
+            <td><code>assert ours == theirs, f"HMAC-SHA1 disagrees with stdlib"</code></td>
+            <td>test_sha256.py:104</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0114</td>
+            <td>SHA-1</td>
+            <td><code>print("  [PASS] HMAC-SHA1 -- 3 stdlib cross-checks")</code></td>
+            <td>test_sha256.py:106</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0115</td>
+            <td>SHA-1</td>
+            <td><code>tests = [test_sha256, test_sha1, test_hmac_sha256, test_hmac_sha1, test_merkle_t</code></td>
+            <td>test_sha256.py:139</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0116</td>
+            <td>ECDH</td>
+            <td><code># TLS 1.2 ECDHE suite</code></td>
+            <td>test_tls_analyzer.py:60</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0117</td>
+            <td>ECDH</td>
+            <td><code>a2 = analyze_cipher_suite('TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256')</code></td>
+            <td>test_tls_analyzer.py:61</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0118</td>
+            <td>AES-128</td>
+            <td><code>a2 = analyze_cipher_suite('TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256')</code></td>
+            <td>test_tls_analyzer.py:61</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0119</td>
+            <td>ECDH</td>
+            <td><code>assert 'ECDHE' in a2['key_exchange']</code></td>
+            <td>test_tls_analyzer.py:63</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0120</td>
+            <td>AES-128</td>
+            <td><code>assert 'AES-128-GCM' in a2['encryption']</code></td>
+            <td>test_tls_analyzer.py:66</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0121</td>
+            <td>ECDH</td>
+            <td><code>print("  [PASS] Cipher suite analysis -- TLS 1.3 + 1.2 ECDHE + RSA")</code></td>
+            <td>test_tls_analyzer.py:72</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0122</td>
+            <td>ECDH</td>
+            <td><code>key_exchange='ECDHE',</code></td>
+            <td>test_tls_analyzer.py:105</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0123</td>
+            <td>AES-128</td>
+            <td><code>assert CIPHER_SUITES[0x1301] == 'TLS_AES_128_GCM_SHA256'</code></td>
+            <td>test_tls_analyzer.py:118</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0124</td>
+            <td>ECDH</td>
+            <td><code>assert CIPHER_SUITES[0xC02F] == 'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256'</code></td>
+            <td>test_tls_analyzer.py:119</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0125</td>
+            <td>AES-128</td>
+            <td><code>assert CIPHER_SUITES[0xC02F] == 'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256'</code></td>
+            <td>test_tls_analyzer.py:119</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0126</td>
+            <td>3DES</td>
+            <td><code>and decodes ClientHello/ServerHello, cipher suites, certificates, and extensions</code></td>
+            <td>tls_analyzer.py:4</td>
+            <td>AES-256-GCM</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0127</td>
+            <td>AES-128</td>
+            <td><code>0x1301: 'TLS_AES_128_GCM_SHA256',</code></td>
+            <td>tls_analyzer.py:41</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0128</td>
+            <td>ECDH</td>
+            <td><code># TLS 1.2 ECDHE</code></td>
+            <td>tls_analyzer.py:44</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0129</td>
+            <td>ECDSA</td>
+            <td><code>0xC02B: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256',</code></td>
+            <td>tls_analyzer.py:45</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0130</td>
+            <td>ECDH</td>
+            <td><code>0xC02B: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256',</code></td>
+            <td>tls_analyzer.py:45</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0131</td>
+            <td>AES-128</td>
+            <td><code>0xC02B: 'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256',</code></td>
+            <td>tls_analyzer.py:45</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0132</td>
+            <td>ECDSA</td>
+            <td><code>0xC02C: 'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384',</code></td>
+            <td>tls_analyzer.py:46</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0133</td>
+            <td>ECDH</td>
+            <td><code>0xC02C: 'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384',</code></td>
+            <td>tls_analyzer.py:46</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0134</td>
+            <td>ECDH</td>
+            <td><code>0xC02F: 'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256',</code></td>
+            <td>tls_analyzer.py:47</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0135</td>
+            <td>AES-128</td>
+            <td><code>0xC02F: 'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256',</code></td>
+            <td>tls_analyzer.py:47</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0136</td>
+            <td>ECDH</td>
+            <td><code>0xC030: 'TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384',</code></td>
+            <td>tls_analyzer.py:48</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0137</td>
+            <td>ECDH</td>
+            <td><code>0xC027: 'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256',</code></td>
+            <td>tls_analyzer.py:49</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0138</td>
+            <td>AES-128</td>
+            <td><code>0xC027: 'TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256',</code></td>
+            <td>tls_analyzer.py:49</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0139</td>
+            <td>ECDH</td>
+            <td><code>0xC028: 'TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384',</code></td>
+            <td>tls_analyzer.py:50</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0140</td>
+            <td>ECDH</td>
+            <td><code>0xCCA8: 'TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256',</code></td>
+            <td>tls_analyzer.py:51</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0141</td>
+            <td>ECDSA</td>
+            <td><code>0xCCA9: 'TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256',</code></td>
+            <td>tls_analyzer.py:52</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0142</td>
+            <td>ECDH</td>
+            <td><code>0xCCA9: 'TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256',</code></td>
+            <td>tls_analyzer.py:52</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0143</td>
+            <td>AES-128</td>
+            <td><code>0x002F: 'TLS_RSA_WITH_AES_128_CBC_SHA',</code></td>
+            <td>tls_analyzer.py:54</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0144</td>
+            <td>AES-128</td>
+            <td><code>0x009C: 'TLS_RSA_WITH_AES_128_GCM_SHA256',</code></td>
+            <td>tls_analyzer.py:56</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0145</td>
+            <td>3DES</td>
+            <td><code>0x002D: 'psk_key_exchange_modes', 0x0033: 'key_share',</code></td>
+            <td>tls_analyzer.py:65</td>
+            <td>AES-256-GCM</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0146</td>
+            <td>AES-128</td>
+            <td><code>if 'AES_128_GCM' in suite_name:</code></td>
+            <td>tls_analyzer.py:196</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0147</td>
+            <td>AES-128</td>
+            <td><code>result['encryption'] = 'AES-128-GCM'</code></td>
+            <td>tls_analyzer.py:197</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0148</td>
+            <td>ECDH</td>
+            <td><code>if 'ECDHE' in suite_name:</code></td>
+            <td>tls_analyzer.py:206</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0149</td>
+            <td>ECDH</td>
+            <td><code>result['key_exchange'] = 'ECDHE (forward secrecy)'</code></td>
+            <td>tls_analyzer.py:207</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0150</td>
+            <td>ECDSA</td>
+            <td><code>if 'ECDSA' in suite_name:</code></td>
+            <td>tls_analyzer.py:213</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0151</td>
+            <td>ECDSA</td>
+            <td><code>result['authentication'] = 'ECDSA'</code></td>
+            <td>tls_analyzer.py:214</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0152</td>
+            <td>AES-128</td>
+            <td><code>if 'AES_128_GCM' in suite_name:</code></td>
+            <td>tls_analyzer.py:218</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0153</td>
+            <td>AES-128</td>
+            <td><code>result['encryption'] = 'AES-128-GCM (AEAD)'</code></td>
+            <td>tls_analyzer.py:219</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0154</td>
+            <td>AES-128</td>
+            <td><code>elif 'AES_128_CBC' in suite_name:</code></td>
+            <td>tls_analyzer.py:222</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0155</td>
+            <td>AES-128</td>
+            <td><code>result['encryption'] = 'AES-128-CBC'</code></td>
+            <td>tls_analyzer.py:223</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0156</td>
+            <td>ECDH</td>
+            <td><code>0xC02F, 0xC030, 0xCCA8, 0xCCA9,  # TLS 1.2 ECDHE</code></td>
+            <td>tls_analyzer.py:366</td>
+            <td>ML-KEM-768</td>
+        </tr></table>
+<h2>Remediation</h2>
+<ul>
+<li><strong>IMMEDIATE:</strong> Replace RSA/ECDH key exchange with ML-KEM (FIPS 203) hybrid</li>
+<li><strong>SHORT-TERM:</strong> Migrate RSA/ECDSA signatures to ML-DSA (FIPS 204)</li>
+<li><strong>QUICK WIN:</strong> Upgrade AES-128 to AES-256, SHA-1/MD5 to SHA-256</li>
+</ul>
+<p><em>Generated by Enigma pqc-scanner | CONFIDENTIAL</em></p>
+</body></html>

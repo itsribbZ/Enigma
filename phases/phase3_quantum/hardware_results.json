@@ -1,0 +1,104 @@
+{
+  "timestamp": "2026-03-22T18:28:11.376889",
+  "backend": "aer_simulator_noise",
+  "is_real_hardware": false,
+  "total_circuits": 5,
+  "results": [
+    {
+      "circuit_name": "Bell State (Phi+)",
+      "backend_name": "aer_simulator_noise",
+      "is_real_hardware": false,
+      "shots": 4096,
+      "counts": {
+        "00": 2029,
+        "11": 2014,
+        "10": 31,
+        "01": 22
+      },
+      "execution_time_ms": 759.1445000143722,
+      "expected_outcomes": [
+        "00",
+        "11"
+      ],
+      "success_rate": 0.987060546875,
+      "notes": "Maximally entangled 2-qubit state. Expect ~50/50 |00> and |11>."
+    },
+    {
+      "circuit_name": "GHZ State (3-qubit)",
+      "backend_name": "aer_simulator_noise",
+      "is_real_hardware": false,
+      "shots": 4096,
+      "counts": {
+        "000": 2025,
+        "111": 1964,
+        "011": 16,
+        "010": 26,
+        "101": 23,
+        "001": 14,
+        "110": 16,
+        "100": 12
+      },
+      "execution_time_ms": 49.824099987745285,
+      "expected_outcomes": [
+        "000",
+        "111"
+      ],
+      "success_rate": 0.973876953125,
+      "notes": "3-qubit entangled state. Expect ~50/50 |000> and |111>."
+    },
+    {
+      "circuit_name": "Grover Search (target=11)",
+      "backend_name": "aer_simulator_noise",
+      "is_real_hardware": false,
+      "shots": 4096,
+      "counts": {
+        "11": 3983,
+        "10": 41,
+        "01": 53,
+        "00": 19
+      },
+      "execution_time_ms": 49.899499979801476,
+      "expected_outcomes": [
+        "11"
+      ],
+      "success_rate": 0.972412109375,
+      "notes": "Amplitude amplification should find |11> with >90% probability."
+    },
+    {
+      "circuit_name": "Bernstein-Vazirani (s=101)",
+      "backend_name": "aer_simulator_noise",
+      "is_real_hardware": false,
+      "shots": 4096,
+      "counts": {
+        "101": 4003,
+        "111": 20,
+        "100": 33,
+        "001": 33,
+        "000": 7
+      },
+      "execution_time_ms": 47.8442000458017,
+      "expected_outcomes": [
+        "101"
+      ],
+      "success_rate": 0.977294921875,
+      "notes": "Single query finds hidden string. Should be 100% on ideal hardware."
+    },
+    {
+      "circuit_name": "Hadamard Superposition",
+      "backend_name": "aer_simulator_noise",
+      "is_real_hardware": false,
+      "shots": 4096,
+      "counts": {
+        "1": 2038,
+        "0": 2058
+      },
+      "execution_time_ms": 50.55649997666478,
+      "expected_outcomes": [
+        "0",
+        "1"
+      ],
+      "success_rate": 1.0,
+      "notes": "Equal superposition. Expect ~50/50 |0> and |1>."
+    }
+  ]
+}

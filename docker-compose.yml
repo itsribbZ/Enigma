@@ -1,0 +1,25 @@
+# Enigma PQC Scanner — Docker Compose
+# Usage:
+#   docker-compose up          # Start API server on port 8000
+#   docker-compose run scanner scan /scan --grade   # CLI scan
+
+services:
+  scanner:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./demo:/scan:ro
+      - scanner-history:/root/.pqc-scanner
+    command: ["--api"]
+
+  cli:
+    build: .
+    volumes:
+      - ./demo:/scan:ro
+      - scanner-history:/root/.pqc-scanner
+    profiles: ["cli"]
+    command: ["scan", "/scan", "--grade"]
+
+volumes:
+  scanner-history:

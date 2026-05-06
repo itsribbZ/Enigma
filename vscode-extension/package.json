@@ -1,0 +1,70 @@
+{
+  "name": "pqc-scanner",
+  "displayName": "PQC Scanner — Quantum Crypto Detector",
+  "description": "Detect quantum-vulnerable cryptography in your code. Real-time diagnostics with auto-fix suggestions.",
+  "version": "4.0.0",
+  "publisher": "enigma",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Linters", "Security"],
+  "keywords": ["post-quantum", "cryptography", "pqc", "security", "NIST", "quantum"],
+  "activationEvents": [
+    "onLanguage:python",
+    "onLanguage:java",
+    "onLanguage:go",
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:rust",
+    "onLanguage:c",
+    "onLanguage:cpp"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pqc-scanner.scanFile",
+        "title": "PQC: Scan Current File"
+      },
+      {
+        "command": "pqc-scanner.scanWorkspace",
+        "title": "PQC: Scan Workspace"
+      },
+      {
+        "command": "pqc-scanner.showDashboard",
+        "title": "PQC: Show Dashboard"
+      }
+    ],
+    "configuration": {
+      "title": "PQC Scanner",
+      "properties": {
+        "pqc-scanner.scanOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Scan files for quantum-vulnerable crypto on save"
+        },
+        "pqc-scanner.severity": {
+          "type": "string",
+          "default": "low",
+          "enum": ["critical", "high", "medium", "low", "info"],
+          "description": "Minimum severity to report"
+        },
+        "pqc-scanner.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Path to Python interpreter with pqc-scanner installed"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
+}

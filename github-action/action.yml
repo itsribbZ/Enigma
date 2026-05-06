@@ -1,0 +1,73 @@
+name: 'PQC Scanner'
+description: 'Scan your codebase for quantum-vulnerable cryptography. SARIF output for GitHub Code Scanning.'
+author: 'Enigma Project'
+
+branding:
+  icon: 'shield'
+  color: 'purple'
+
+inputs:
+  path:
+    description: 'Path to scan (relative to workspace root)'
+    required: false
+    default: '.'
+  severity:
+    description: 'Minimum severity to report (critical, high, medium, low, info)'
+    required: false
+    default: 'low'
+  format:
+    description: 'Output format (sarif, json, text, html)'
+    required: false
+    default: 'sarif'
+  output:
+    description: 'Output file path'
+    required: false
+    default: 'pqc-scan-results.sarif'
+  fail-on-critical:
+    description: 'Fail the action if CRITICAL findings are found'
+    required: false
+    default: 'true'
+  scan-dependencies:
+    description: 'Also scan dependency manifests (requirements.txt, package.json, etc.)'
+    required: false
+    default: 'true'
+
+outputs:
+  findings:
+    description: 'Number of findings'
+  risk-score:
+    description: 'Risk score (0-100)'
+  sarif-file:
+    description: 'Path to SARIF output file'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install pqc-scanner
+      shell: bash
+      run: |
+        pip install cryptography
+
+    - name: Run PQC scan
+      shell: bash
+      id: scan
+      run: |
+        python ${{ github.action_path }}/scan.py \
+          --path "${{ inputs.path }}" \
+          --severity "${{ inputs.severity }}" \
+          --format "${{ inputs.format }}" \
+          --output "${{ inputs.output }}" \
+          --scan-deps "${{ inputs.scan-dependencies }}" \
+          --fail-on-critical "${{ inputs.fail-on-critical }}"
+
+    - name: Upload SARIF
+      if: inputs.format == 'sarif'
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: ${{ inputs.output }}
+      continue-on-error: true

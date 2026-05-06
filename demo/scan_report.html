@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html><head><title>PQC Scanner Report</title>
+<style>
+body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #e0e0e0; padding: 20px; }
+h1 { color: #bb86fc; } h2 { color: #03dac6; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+th { background: #2d2d44; color: #bb86fc; padding: 10px; text-align: left; }
+td { padding: 8px; border-bottom: 1px solid #333; }
+code { background: #2d2d44; padding: 2px 6px; border-radius: 3px; font-size: 12px; }
+.score { font-size: 48px; color: #ff4444; }
+.stat { display: inline-block; margin: 10px 20px; text-align: center; }
+.stat-num { font-size: 32px; color: #bb86fc; }
+</style></head><body>
+<h1>PQC-SCANNER Report</h1>
+<p>Scan: C:\Users\jbro1\Desktop\Enigma\demo\sample_vulnerable_project | Date: 2026-03-22T19:31:22.929472</p>
+<div class="stat"><div class="score">100</div><div>Risk Score</div></div>
+<div class="stat"><div class="stat-num">29</div><div>Findings</div></div>
+<div class="stat"><div class="stat-num">6</div><div>Files Scanned</div></div>
+<div class="stat"><div class="stat-num">16</div><div>Critical</div></div>
+<h2>Findings</h2>
+<table><tr><th>Severity</th><th>ID</th><th>Algorithm</th><th>Code</th><th>Location</th><th>PQC Replacement</th></tr>
+
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0001</td>
+            <td>RSA</td>
+            <td><code>crypto.generateKeyPair(&#x27;rsa&#x27;, {</code></td>
+            <td>api.js:5</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0002</td>
+            <td>DH/ECDH</td>
+            <td><code>const dh = crypto.createDiffieHellman(2048);</code></td>
+            <td>api.js:14</td>
+            <td>Consult NIST PQC standards</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0003</td>
+            <td>RSA/ECDSA</td>
+            <td><code>const sign = crypto.createSign(&#x27;SHA256&#x27;);</code></td>
+            <td>api.js:18</td>
+            <td>Consult NIST PQC standards</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0004</td>
+            <td>DH/ECDH</td>
+            <td><code>const ecdh = crypto.createECDH(&#x27;secp256k1&#x27;);</code></td>
+            <td>api.js:22</td>
+            <td>Consult NIST PQC standards</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0005</td>
+            <td>RSA</td>
+            <td><code>private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)</code></td>
+            <td>app.py:12</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0006</td>
+            <td>ECDSA</td>
+            <td><code># === ECDSA Signatures (CRITICAL: Shor-vulnerable) ===</code></td>
+            <td>app.py:22</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0007</td>
+            <td>ECDSA</td>
+            <td><code>ec_key = ec.generate_private_key(ec.SECP256R1())</code></td>
+            <td>app.py:23</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0008</td>
+            <td>ECDSA</td>
+            <td><code>signature = ec_key.sign(b&quot;document to sign&quot;, ec.ECDSA(hashes.SHA256()))</code></td>
+            <td>app.py:24</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0009</td>
+            <td>AES-128</td>
+            <td><code># === AES-128 (MEDIUM: Grover halves to 64-bit) ===</code></td>
+            <td>app.py:26</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0010</td>
+            <td>3DES</td>
+            <td><code>from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes</code></td>
+            <td>app.py:27</td>
+            <td>AES-256-GCM</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0011</td>
+            <td>AES-128</td>
+            <td><code>aes_key = os.urandom(16)  # AES-128 — only 64-bit post-quantum security!</code></td>
+            <td>app.py:28</td>
+            <td>AES-256</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0012</td>
+            <td>3DES</td>
+            <td><code>cipher = Cipher(algorithms.AES(aes_key), modes.GCM(os.urandom(12)))</code></td>
+            <td>app.py:29</td>
+            <td>AES-256-GCM</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0013</td>
+            <td>SHA-1</td>
+            <td><code>legacy_hash = hashlib.sha1(b&quot;legacy data fingerprint&quot;)</code></td>
+            <td>app.py:32</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0014</td>
+            <td>MD5</td>
+            <td><code># === MD5 (HIGH: completely broken) ===</code></td>
+            <td>app.py:34</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0015</td>
+            <td>MD5</td>
+            <td><code>old_checksum = hashlib.md5(b&quot;file integrity check&quot;)</code></td>
+            <td>app.py:35</td>
+            <td>SHA-256 or SHA-3</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0016</td>
+            <td>RSA</td>
+            <td><code>&quot;crypto/rsa&quot;</code></td>
+            <td>crypto_utils.go:5</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0017</td>
+            <td>ECDSA</td>
+            <td><code>&quot;crypto/ecdsa&quot;</code></td>
+            <td>crypto_utils.go:6</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0018</td>
+            <td>ECDH</td>
+            <td><code>&quot;crypto/elliptic&quot;</code></td>
+            <td>crypto_utils.go:7</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0019</td>
+            <td>3DES</td>
+            <td><code>&quot;crypto/des&quot;</code></td>
+            <td>crypto_utils.go:9</td>
+            <td>AES-256-GCM</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0020</td>
+            <td>RSA</td>
+            <td><code>key, _ := rsa.GenerateKey(rand.Reader, 2048)</code></td>
+            <td>crypto_utils.go:14</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0021</td>
+            <td>ECDSA</td>
+            <td><code>ecKey, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)</code></td>
+            <td>crypto_utils.go:18</td>
+            <td>ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0022</td>
+            <td>ECDH</td>
+            <td><code>ecKey, _ := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)</code></td>
+            <td>crypto_utils.go:18</td>
+            <td>ML-KEM-768</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0023</td>
+            <td>3DES</td>
+            <td><code>block, _ := des.NewCipher([]byte(&quot;8byteky&quot;))</code></td>
+            <td>crypto_utils.go:22</td>
+            <td>AES-256-GCM</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0024</td>
+            <td>Old TLS</td>
+            <td><code>ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</code></td>
+            <td>nginx.conf:6</td>
+            <td>Consult NIST PQC standards</td>
+        </tr>
+        <tr>
+            <td style="color:#ff8800;font-weight:bold">HIGH</td>
+            <td>PQC-0025</td>
+            <td>Weak cipher</td>
+            <td><code>ssl_ciphers RC4:DES:3DES:AES128-SHA:AES256-SHA;</code></td>
+            <td>nginx.conf:7</td>
+            <td>Consult NIST PQC standards</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0030</td>
+            <td>RSA</td>
+            <td><code>KeyPairGenerator kpg = KeyPairGenerator.getInstance(&quot;RSA&quot;);</code></td>
+            <td>server.java:8</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0031</td>
+            <td>RSA</td>
+            <td><code>Cipher cipher = Cipher.getInstance(&quot;RSA/ECB/PKCS1Padding&quot;);</code></td>
+            <td>server.java:13</td>
+            <td>ML-KEM-768 or ML-DSA-65</td>
+        </tr>
+        <tr>
+            <td style="color:#ff4444;font-weight:bold">CRITICAL</td>
+            <td>PQC-0032</td>
+            <td>ECDSA/DSA</td>
+            <td><code>KeyPairGenerator ecKpg = KeyPairGenerator.getInstance(&quot;EC&quot;);</code></td>
+            <td>server.java:17</td>
+            <td>Consult NIST PQC standards</td>
+        </tr>
+        <tr>
+            <td style="color:#ffcc00;font-weight:bold">MEDIUM</td>
+            <td>PQC-0033</td>
+            <td>SHA-1/MD5</td>
+            <td><code>MessageDigest md = MessageDigest.getInstance(&quot;SHA-1&quot;);</code></td>
+            <td>server.java:21</td>
+            <td>Consult NIST PQC standards</td>
+        </tr></table>
+<h2>Remediation</h2>
+<ul>
+<li><strong>IMMEDIATE:</strong> Replace RSA/ECDH key exchange with ML-KEM (FIPS 203) hybrid</li>
+<li><strong>SHORT-TERM:</strong> Migrate RSA/ECDSA signatures to ML-DSA (FIPS 204)</li>
+<li><strong>QUICK WIN:</strong> Upgrade AES-128 to AES-256, SHA-1/MD5 to SHA-256</li>
+</ul>
+<p><em>Generated by Enigma pqc-scanner | CONFIDENTIAL</em></p>
+</body></html>

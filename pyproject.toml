@@ -1,0 +1,96 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pqc-scanner"
+version = "4.0.0"
+description = "Post-Quantum Cryptography Migration Scanner — detect quantum-vulnerable crypto in your codebase"
+readme = "README_PYPI.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Enigma Project", email = "enigma@example.com"},
+]
+keywords = [
+    "post-quantum", "cryptography", "pqc", "security", "scanner",
+    "NIST", "ML-KEM", "ML-DSA", "FIPS-203", "FIPS-204",
+    "CNSA", "quantum-safe", "migration", "CBOM", "CycloneDX",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: Security :: Cryptography",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+certs = ["cryptography>=41.0"]
+reports = ["reportlab>=4.0"]
+treesitter = [
+    "tree-sitter>=0.23",
+    "tree-sitter-python>=0.23",
+    "tree-sitter-java>=0.23",
+    "tree-sitter-go>=0.23",
+    "tree-sitter-javascript>=0.23",
+    "tree-sitter-typescript>=0.23",
+    "tree-sitter-rust>=0.23",
+    "tree-sitter-c>=0.23",
+]
+all = [
+    "cryptography>=41.0",
+    "reportlab>=4.0",
+    "tree-sitter>=0.23",
+    "tree-sitter-python>=0.23",
+    "tree-sitter-java>=0.23",
+    "tree-sitter-go>=0.23",
+    "tree-sitter-javascript>=0.23",
+    "tree-sitter-typescript>=0.23",
+    "tree-sitter-rust>=0.23",
+    "tree-sitter-c>=0.23",
+]
+
+[project.urls]
+Homepage = "https://github.com/enigma/pqc-scanner"
+Documentation = "https://github.com/enigma/pqc-scanner#readme"
+Issues = "https://github.com/enigma/pqc-scanner/issues"
+
+[project.scripts]
+pqc-scanner = "pqc_scanner:main"
+
+[tool.setuptools.packages.find]
+where = ["phases/phase6_scanner"]
+include = ["pqc_scanner*", "ast_scanner*", "dependency_scanner*", "compliance*", "executive_report*", "system_scanner*"]
+
+[tool.setuptools]
+py-modules = [
+    "pqc_scanner",
+    "ast_scanner",
+    "dependency_scanner",
+    "compliance",
+    "executive_report",
+    "system_scanner",
+    "treesitter_scanner",
+    "autofix",
+]
+package-dir = {"" = "phases/phase6_scanner"}
+
+[tool.pytest.ini_options]
+testpaths = ["phases"]
+markers = [
+    "network: tests requiring network access",
+    "slow: tests that take >10 seconds (quantum simulations)",
+]

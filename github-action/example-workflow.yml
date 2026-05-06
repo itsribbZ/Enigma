@@ -1,0 +1,27 @@
+# Example: Add this to .github/workflows/pqc-scan.yml in your repo
+name: PQC Vulnerability Scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  security-events: write  # Required for SARIF upload
+
+jobs:
+  pqc-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run PQC Scanner
+        uses: enigma/pqc-scanner-action@v1
+        with:
+          path: '.'
+          severity: 'medium'
+          format: 'sarif'
+          output: 'pqc-results.sarif'
+
+      # Results automatically appear in GitHub Security tab
