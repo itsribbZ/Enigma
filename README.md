@@ -137,9 +137,9 @@ hash = hashlib.md5(data)  # pqc-ignore[MD5]
 
 **Zero required** for basic scanning. Optional:
 
-- `cryptography` — certificate scanning (`pip install pqc-scanner[certs]`)
-- `reportlab` — PDF executive reports (`pip install pqc-scanner[reports]`)
-- `tree-sitter` + grammars — deep multi-language analysis (`pip install pqc-scanner[all]`)
+- `cryptography` — certificate scanning (`pip install -e ".[certs]"`)
+- `reportlab` — PDF executive reports (`pip install -e ".[reports]"`)
+- `tree-sitter` + grammars — deep multi-language analysis (`pip install -e ".[all]"`)
 
 ## Documentation
 
