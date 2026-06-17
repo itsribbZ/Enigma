@@ -24,7 +24,9 @@ The NIST deadline is 2035. CNSA 2.0 deadlines start in 2025. Your code has quant
 ## Quick Start
 
 ```bash
-pip install pqc-scanner
+git clone https://github.com/itsribbZ/Enigma.git
+cd Enigma
+pip install -e .
 
 # Basic scan
 pqc-scanner scan /path/to/project
