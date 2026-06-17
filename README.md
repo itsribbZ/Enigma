@@ -96,7 +96,7 @@ Scores 0–100 with A–F letter grades.
 ## GitHub Action
 
 ```yaml
-- uses: itsribbZ/Enigma/github-action@v4
+- uses: itsribbZ/Enigma/github-action@main
   with:
     path: '.'
     format: 'sarif'
