@@ -10,7 +10,7 @@ readme = "README_PYPI.md"
 license = {text = "MIT"}
 requires-python = ">=3.9"
 authors = [
-    {name = "Enigma Project", email = "enigma@example.com"},
+    {name = "Enigma Project", email = "jacobribbofficial@gmail.com"},
 ]
 keywords = [
     "post-quantum", "cryptography", "pqc", "security", "scanner",
@@ -64,9 +64,9 @@ all = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/enigma/pqc-scanner"
-Documentation = "https://github.com/enigma/pqc-scanner#readme"
-Issues = "https://github.com/enigma/pqc-scanner/issues"
+Homepage = "https://github.com/itsribbZ/Enigma"
+Documentation = "https://github.com/itsribbZ/Enigma#readme"
+Issues = "https://github.com/itsribbZ/Enigma/issues"
 
 [project.scripts]
 pqc-scanner = "pqc_scanner:main"
