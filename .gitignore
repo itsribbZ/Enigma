@@ -71,3 +71,8 @@ desktop.ini
 .claude/
 CLAUDE.md
 AGENTS.md
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Dev-only PDF generators (hardcode author-machine paths; not for publish)
+# ──────────────────────────────────────────────────────────────────────────────
+tools/

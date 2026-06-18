@@ -1,9 +1,10 @@
 """
 Enigma pqc-scanner v4.0: Tree-sitter Deep Multi-Language Crypto Scanner.
 
-Uses tree-sitter for real AST parsing across 13 languages:
-  Python, Java, Go, JavaScript/TypeScript, Rust, C/C++,
-  C#, Ruby, PHP, Kotlin, Swift, Scala
+Supports 7 languages via installable tree-sitter grammars:
+  Python, Java, Go, JavaScript/TypeScript, Rust, C/C++.
+6 additional analyzers ship (C#, Ruby, PHP, Kotlin, Swift, Scala)
+but require tree-sitter grammars not yet packaged in the [treesitter] extra.
 
 Detects crypto API usage through:
   - Import/use statement tracking

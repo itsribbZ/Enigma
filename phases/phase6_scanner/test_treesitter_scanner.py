@@ -1,6 +1,7 @@
 """
 Enigma pqc-scanner v4.0: Tree-sitter scanner test suite.
-Tests deep AST analysis across all 13 supported languages + IaC.
+Tests deep AST analysis across the 7 languages with installable grammars
+(6 additional analyzers ship but require grammars not yet packaged) + IaC.
 """
 import os
 import tempfile
