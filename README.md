@@ -153,7 +153,7 @@ Bundled corporate-overview PDFs in repo:
 
 ## License
 
-MIT
+All rights reserved. Source available for portfolio review; not licensed for reuse. See [LICENSE](LICENSE).
 
 ## Author
 
